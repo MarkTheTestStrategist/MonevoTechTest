@@ -1,0 +1,1 @@
+pwsh bin/Debug/net9.0/playwright.ps1 codegen https://money.monevo.co.uk/apply/loan-details/amount
