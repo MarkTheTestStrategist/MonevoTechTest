@@ -42,9 +42,10 @@ namespace monevotechtest.Tests
             await ApplicationForm.DateOfBirth(Page);
             await ApplicationForm.EmailAddress(Page);
 
-            // The mobile number you provided was not accepted as a valid number : 07897641544
+            // The mobile number that was provided isn't being accepted as a valid number : 07897641544
             // I have had to use an existing phone number, as even using the TV & Film (e.g. 07700901126) number invokes validation.
-            await ApplicationForm.PhoneNumber(Page, "07974905111");
+            await ApplicationForm.MobileNumber(Page, "07974905111");
+            await ApplicationForm.MobileNumberValidationMessage(Page, false);
             await ApplicationForm.MaritalStatusVisiblity(Page);
         }
 
@@ -58,8 +59,8 @@ namespace monevotechtest.Tests
             await ApplicationForm.LoanTerm(Page);
             await ApplicationForm.DateOfBirth(Page);
             await ApplicationForm.EmailAddress(Page);
-            await ApplicationForm.PhoneNumber(Page, "310-323-258");
-            await ApplicationForm.PhoneNumberValidationMessage(Page);
+            await ApplicationForm.MobileNumber(Page, "310-323-258");
+            await ApplicationForm.MobileNumberValidationMessage(Page, true);
         }
     }
 }
