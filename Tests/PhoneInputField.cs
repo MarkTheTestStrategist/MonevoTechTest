@@ -1,5 +1,7 @@
 ﻿using Microsoft.Playwright;
+using monevotechtest.Component;
 using monevotechtest.HelperFiles;
+using monevotechtest.Pages;
 
 namespace monevotechtest.Tests
 {

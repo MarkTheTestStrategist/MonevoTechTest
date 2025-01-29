@@ -1,6 +1,6 @@
 ﻿using Microsoft.Playwright;
 
-namespace monevotechtest.HelperFiles
+namespace monevotechtest.Pages
 {
     internal static class ApplicationForm
     {
