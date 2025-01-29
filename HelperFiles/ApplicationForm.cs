@@ -38,22 +38,16 @@ namespace monevotechtest.HelperFiles
             await Continue(Page);
         }
 
-        internal static async Task PhoneNumber(IPage Page, bool isValid)
+        internal static async Task PhoneNumber(IPage Page, string mobileNumber)
         {
-            // The mobile number you provided was not accepted as a valid number : 07897641544
-            // I have had to use my own phone number as even using the TV&Film number invokes validation.
-            var mobileNumber = isValid ? "07974160038" : "310-323-258";
-
             await Page.Locator("#mobileNumber").FillAsync(mobileNumber);
             await Continue(Page);
-
-            if (!isValid)
-            {
-                await Assertions.Expect(Page.GetByText("Enter a valid UK mobile phone")).ToBeVisibleAsync();
-            }
         }
 
-        internal static async Task MaritalStatus(IPage Page) =>
+        internal static async Task MaritalStatusVisiblity(IPage Page) =>
             await Assertions.Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "What’s your marital status?" })).ToBeVisibleAsync();
+
+        internal static async Task PhoneNumberValidationMessage(IPage Page) =>
+            await Assertions.Expect(Page.GetByText("Enter a valid UK mobile phone")).ToBeVisibleAsync();
     }
 }
