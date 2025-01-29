@@ -2,54 +2,58 @@
 
 namespace monevotechtest.Pages
 {
-    internal static class ApplicationForm
+    internal class ApplicationForm
     {
-        internal static async Task Continue(IPage Page) =>
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Continue" }).ClickAsync();
+        private readonly IPage page;
 
-        internal static async Task LoanValue(IPage Page, string loanValue)
+        public ApplicationForm(IPage page)
         {
-            await Page.GetByRole(AriaRole.Textbox).ClickAsync();
-            await Page.GetByPlaceholder("£1,000 to £").FillAsync(loanValue);
-            await Continue(Page);
+            this.page = page;
         }
 
-        internal static async Task LoanTerm(IPage Page)
+        internal async Task Continue() =>
+            await page.GetByRole(AriaRole.Button, new() { Name = "Continue" }).ClickAsync();
+
+        internal async Task LoanValue(string loanValue)
         {
-            await Page.GetByRole(AriaRole.Button, new() { Name = "1 year" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Debt consolidation" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Mr", Exact = true }).ClickAsync();
-            await Page.Locator("#firstName").ClickAsync();
-            await Page.Locator("#firstName").FillAsync("Staurt");
-            await Page.Locator("#lastName").ClickAsync();
-            await Page.Locator("#lastName").FillAsync("Minion");
-            await Continue(Page);
+            await page.GetByPlaceholder("£1,000 to £").FillAsync(loanValue);
+            await Continue();
         }
 
-        internal static async Task DateOfBirth(IPage Page)
+        internal async Task LoanTerm()
         {
-            await Page.Locator("#dateOfBirth").FillAsync("10/01/1980");
-            await Continue(Page);
+            await page.GetByRole(AriaRole.Button, new() { Name = "1 year" }).ClickAsync();
+            await page.GetByRole(AriaRole.Button, new() { Name = "Debt consolidation" }).ClickAsync();
+            await page.GetByRole(AriaRole.Button, new() { Name = "Mr", Exact = true }).ClickAsync();
+            await page.Locator("#firstName").FillAsync("Staurt");
+            await page.Locator("#lastName").FillAsync("Minion");
+            await Continue();
         }
 
-        internal static async Task EmailAddress(IPage Page)
+        internal async Task DateOfBirth()
         {
-            await Page.Locator("#emailAddress").FillAsync("stuartminion@gmail.com");
-            await Continue(Page);
+            await page.Locator("#dateOfBirth").FillAsync("10/01/1980");
+            await Continue();
         }
 
-        internal static async Task MobileNumber(IPage Page, string mobileNumber)
+        internal async Task EmailAddress()
         {
-            await Page.Locator("#mobileNumber").FillAsync(mobileNumber);
-            await Continue(Page);
+            await page.Locator("#emailAddress").FillAsync("stuartminion@gmail.com");
+            await Continue();
         }
 
-        internal static async Task MaritalStatusVisiblity(IPage Page) =>
-            await Assertions.Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "What’s your marital status?" })).ToBeVisibleAsync();
+        internal async Task MobileNumber(string mobileNumber)
+        {
+            await page.Locator("#mobileNumber").FillAsync(mobileNumber);
+            await Continue();
+        }
 
-        internal static async Task MobileNumberValidationMessage(IPage Page, bool shouldBeVisible) =>
+        internal async Task MaritalStatusVisiblity() =>
+            await Assertions.Expect(page.GetByRole(AriaRole.Heading, new() { Name = "What’s your marital status?" })).ToBeVisibleAsync();
+
+        internal async Task MobileNumberValidationMessage(bool shouldBeVisible) =>
             await (shouldBeVisible
-                ? Assertions.Expect(Page.GetByText("Enter a valid UK mobile phone")).ToBeVisibleAsync()
-                : Assertions.Expect(Page.GetByText("Enter a valid UK mobile phone")).ToBeHiddenAsync());
+                ? Assertions.Expect(page.GetByText("Enter a valid UK mobile phone")).ToBeVisibleAsync()
+                : Assertions.Expect(page.GetByText("Enter a valid UK mobile phone")).ToBeHiddenAsync());
     }
 }
