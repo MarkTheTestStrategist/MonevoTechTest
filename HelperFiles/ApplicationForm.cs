@@ -38,7 +38,7 @@ namespace monevotechtest.HelperFiles
             await Continue(Page);
         }
 
-        internal static async Task PhoneNumber(IPage Page, string mobileNumber)
+        internal static async Task MobileNumber(IPage Page, string mobileNumber)
         {
             await Page.Locator("#mobileNumber").FillAsync(mobileNumber);
             await Continue(Page);
@@ -47,7 +47,9 @@ namespace monevotechtest.HelperFiles
         internal static async Task MaritalStatusVisiblity(IPage Page) =>
             await Assertions.Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "What’s your marital status?" })).ToBeVisibleAsync();
 
-        internal static async Task PhoneNumberValidationMessage(IPage Page) =>
-            await Assertions.Expect(Page.GetByText("Enter a valid UK mobile phone")).ToBeVisibleAsync();
+        internal static async Task MobileNumberValidationMessage(IPage Page, bool shouldBeVisible) =>
+            await (shouldBeVisible
+                ? Assertions.Expect(Page.GetByText("Enter a valid UK mobile phone")).ToBeVisibleAsync()
+                : Assertions.Expect(Page.GetByText("Enter a valid UK mobile phone")).ToBeHiddenAsync());
     }
 }
