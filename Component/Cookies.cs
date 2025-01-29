@@ -1,6 +1,6 @@
 ﻿using Microsoft.Playwright;
 
-namespace monevotechtest.HelperFiles
+namespace monevotechtest.Component
 {
     internal static class Cookies
     {
