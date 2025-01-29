@@ -1,0 +1,1 @@
+﻿pwsh bin/Debug/net9.0/playwright.ps1 show-trace C:\Dev\MonevoTechTest\bin\Debug\net9.0\playwright-traces/monevotechtest.Tests.PhoneInputField.ValidMobileNumber.zip
