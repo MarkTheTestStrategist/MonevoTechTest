@@ -1,18 +1,16 @@
 # Overview
-This repo contains two tests for checking the phone number input field in an application form on the Monevo website, where each entry is incremental. 
+This repository contains two tests for verifying the phone number input field in an application form on the Monevo website. Each entry is incremental.
 
-The tests check for a valid uk mobile number & an invalid uk mobile number.
+The tests validate both a valid UK mobile number and an invalid UK mobile number.
 
-The tests do not go beyond the Marital Status stage of the application process. 
-
+The tests do not proceed beyond the Marital Status stage of the application process.
 
 # Tracer
-I have added code that will run a trace everytime the test is run. This is extremely useful for debugging issues and also allows you to view images of each page visited. 
-
+Code has been added to run a trace every time a test is executed. This is extremely useful for debugging issues and allows you to view images of each page visited.
 
 # Codegen
-There is a file called `runCodegen.ps1` which will run the codegen command. 
+A file named `runCodegen.ps1` is included to run the codegen command.
 
->Playwright comes with the ability to generate tests for you as you perform actions in the browser and is a great way to quickly get started with testing. Playwright will look at your page and figure out the best locator, prioritizing role, text and test id locators. If the generator finds multiple elements matching the locator, it will improve the locator to make it resilient that uniquely identify the target element."
+> Playwright can generate tests as you perform actions in the browser, making it a great way to quickly start testing. Playwright will analyze your page and determine the best locator, prioritizing role, text, and test ID locators. If multiple elements match the locator, it will refine the locator to uniquely identify the target element.
 
-For further reading on Codegen, visit: https://playwright.dev/dotnet/docs/codegen 
+For further reading on Codegen, visit: [Playwright Codegen Documentation](https://playwright.dev/dotnet/docs/codegen)
