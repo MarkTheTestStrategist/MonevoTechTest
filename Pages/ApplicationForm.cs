@@ -6,10 +6,8 @@ namespace monevotechtest.Pages
     {
         private readonly IPage page;
 
-        public ApplicationForm(IPage page)
-        {
+        public ApplicationForm(IPage page) =>
             this.page = page;
-        }
 
         internal async Task Continue() =>
             await page.GetByRole(AriaRole.Button, new() { Name = "Continue" }).ClickAsync();
