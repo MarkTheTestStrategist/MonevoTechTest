@@ -2,54 +2,54 @@
 
 namespace monevotechtest.Pages
 {
-    internal class ApplicationForm
+    internal static class ApplicationForm
     {
-        private readonly IPage page;
+        //private static IPage? page;
+        //internal static void Initialize(IPage pageInstance) => 
+        //    page = pageInstance;
 
-        public ApplicationForm(IPage page) =>
-            this.page = page;
-
-        internal async Task Continue() =>
+        internal static async Task Continue(IPage page) =>
             await page.GetByRole(AriaRole.Button, new() { Name = "Continue" }).ClickAsync();
 
-        internal async Task LoanValue(string loanValue)
+        internal static async Task LoanValue(IPage page, string loanValue)
         {
+            await page.GetByRole(AriaRole.Textbox).ClickAsync();
             await page.GetByPlaceholder("£1,000 to £").FillAsync(loanValue);
-            await Continue();
+            await Continue(page);
         }
 
-        internal async Task LoanTerm()
+        internal static async Task LoanTerm(IPage page)
         {
             await page.GetByRole(AriaRole.Button, new() { Name = "1 year" }).ClickAsync();
             await page.GetByRole(AriaRole.Button, new() { Name = "Debt consolidation" }).ClickAsync();
             await page.GetByRole(AriaRole.Button, new() { Name = "Mr", Exact = true }).ClickAsync();
             await page.Locator("#firstName").FillAsync("Staurt");
             await page.Locator("#lastName").FillAsync("Minion");
-            await Continue();
+            await Continue(page);
         }
 
-        internal async Task DateOfBirth()
+        internal static async Task DateOfBirth(IPage page)
         {
             await page.Locator("#dateOfBirth").FillAsync("10/01/1980");
-            await Continue();
+            await Continue(page);
         }
 
-        internal async Task EmailAddress()
+        internal static async Task EmailAddress(IPage page)
         {
             await page.Locator("#emailAddress").FillAsync("stuartminion@gmail.com");
-            await Continue();
+            await Continue(page);
         }
 
-        internal async Task MobileNumber(string mobileNumber)
+        internal static async Task MobileNumber(IPage page, string mobileNumber)
         {
             await page.Locator("#mobileNumber").FillAsync(mobileNumber);
-            await Continue();
+            await Continue(page);
         }
 
-        internal async Task MaritalStatusVisiblity() =>
+        internal static async Task MaritalStatusVisiblity(IPage page) =>
             await Assertions.Expect(page.GetByRole(AriaRole.Heading, new() { Name = "What’s your marital status?" })).ToBeVisibleAsync();
 
-        internal async Task MobileNumberValidationMessage(bool shouldBeVisible) =>
+        internal static async Task MobileNumberValidationMessage(IPage page, bool shouldBeVisible) =>
             await (shouldBeVisible
                 ? Assertions.Expect(page.GetByText("Enter a valid UK mobile phone")).ToBeVisibleAsync()
                 : Assertions.Expect(page.GetByText("Enter a valid UK mobile phone")).ToBeHiddenAsync());

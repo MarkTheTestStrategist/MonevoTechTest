@@ -37,36 +37,32 @@ namespace monevotechtest.Tests
         [Description("Check application form accepts a valid mobile number")]
         public async Task ValidMobileNumber()
         {
-            var applicationForm = new ApplicationForm(Page);
-
             await Navigate.ApplicationForm(Page);
             await Cookies.AcceptAllCookies(Page);
-            await applicationForm.LoanValue("10000");
-            await applicationForm.LoanTerm();
-            await applicationForm.DateOfBirth();
-            await applicationForm.EmailAddress();
+            await ApplicationForm.LoanValue(Page, "10000");
+            await ApplicationForm.LoanTerm(Page);
+            await ApplicationForm.DateOfBirth(Page);
+            await ApplicationForm.EmailAddress(Page);
 
             // The mobile number that was provided isn't being accepted as a valid number : 07897641544
             // I have had to use an existing phone number, as even using the TV & Film (e.g. 07700901126) number invokes validation.
-            await applicationForm.MobileNumber("07974905111");
-            await applicationForm.MobileNumberValidationMessage(false);
-            await applicationForm.MaritalStatusVisiblity();
+            await ApplicationForm.MobileNumber(Page, "07974905111");
+            await ApplicationForm.MobileNumberValidationMessage(Page, false);
+            await ApplicationForm.MaritalStatusVisiblity(Page);
         }
 
         [Test]
         [Description("Check application form does not accept an invalid mobile number")]
         public async Task InValidMobileNumber()
         {
-            var applicationForm = new ApplicationForm(Page);
-
             await Navigate.ApplicationForm(Page);
             await Cookies.AcceptAllCookies(Page);
-            await applicationForm.LoanValue("10000");
-            await applicationForm.LoanTerm();
-            await applicationForm.DateOfBirth();
-            await applicationForm.EmailAddress();
-            await applicationForm.MobileNumber("310-323-258");
-            await applicationForm.MobileNumberValidationMessage(true);
+            await ApplicationForm.LoanValue(Page, "10000");
+            await ApplicationForm.LoanTerm(Page);
+            await ApplicationForm.DateOfBirth(Page);
+            await ApplicationForm.EmailAddress(Page);
+            await ApplicationForm.MobileNumber(Page, "310-323-258");
+            await ApplicationForm.MobileNumberValidationMessage(Page, true);
         }
     }
 }
