@@ -14,19 +14,13 @@ The tests do not proceed beyond the Marital Status stage of the application proc
 
 ## Option 2 - Via PowerShell
 1. [Clone the repository](https://github.com/MarkTheTestStrategist/MonevoTechTest)
-1. Enter the following on the CMD line:
+1. Enter the following on the CMD line; this will run in headed mode as this is currently defined in the Setup of the test suite:
 
      `dotnet test`
 
-1. To run tests in headed mode, use:
+1. To run tests with a specific browser, use:
 
-    `$env:HEADED="1"`
-    
-    `dotnet test`
-
-1. To run tests in headed mode with a specific browser, use:
-
-    `$env:HEADED="1" $env:BROWSER="firefox" dotnet test`
+    `$env:BROWSER="firefox" dotnet test`
 
 1. To run tests on different browsers:
 
