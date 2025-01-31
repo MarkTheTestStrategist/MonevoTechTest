@@ -20,7 +20,9 @@ The tests do not proceed beyond the Marital Status stage of the application proc
 
 1. To run tests with a specific browser, use:
 
-    `$env:BROWSER="firefox" dotnet test`
+    `$env:BROWSER="firefox"`
+    
+    `dotnet test`
 
 1. To run tests on different browsers:
 
